@@ -172,7 +172,7 @@ def http_download_file(url, dir, overwrite=True):
 
 
 def parse_xml(text):
-    parsed = bs.BeautifulSoup(text, "lxml")
+    parsed = bs.BeautifulSoup(text, features="lxml-xml")
     if parsed is None:
         return None
     return parsed
@@ -246,6 +246,7 @@ def main(argc, argv):
     boe_summary_http_res = http_get(summary_url)
     if boe_summary_http_res is None:
         return 1
+    boe_summary_http_res.encoding="utf-8"
     boe_summary = parse_xml(boe_summary_http_res.text)
     if boe_summary is None:
         return 1
@@ -268,9 +269,9 @@ def main(argc, argv):
             if app_exit:
                 break
             if doc_type == BOE_DOC_TYPE:
-                doc = f"{BOE_URL}{item.urlxml.get_text()}"
+                doc = f"{BOE_URL}{item.urlXml.get_text()}"
             else:
-                doc = f"{BOE_URL}{item.urlpdf.get_text()}"
+                doc = f"{BOE_URL}{item.urlPdf.get_text()}"
             logger.info("Downloading file - %s - %s/", doc, dept_dir)
             if http_download_file(doc, dept_dir, False):
                 num_downloaded_files = num_downloaded_files + 1
