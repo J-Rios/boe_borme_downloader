@@ -253,6 +253,8 @@ def main(argc, argv):
     num_downloaded_files = 0
     boe_departments = boe_summary.find_all(emiter)
     for department in boe_departments:
+        if app_exit:
+            break
         dept_id = department["etq"]
         # Create department directory
         dept_dir = f"{summary_dir}/{dept_id}"
@@ -263,6 +265,8 @@ def main(argc, argv):
         # Get all documents from this department
         boe_items = department.find_all("item")
         for item in boe_items:
+            if app_exit:
+                break
             if doc_type == BOE_DOC_TYPE:
                 doc = f"{BOE_URL}{item.urlxml.get_text()}"
             else:
@@ -271,7 +275,10 @@ def main(argc, argv):
             if http_download_file(doc, dept_dir, False):
                 num_downloaded_files = num_downloaded_files + 1
     logger.info("Num files downloaded: %d", num_downloaded_files)
-    logger.info("Operation completed")
+    if app_exit:
+        logger.info("Operation stopped by user")
+    else:
+        logger.info("Operation completed")
     return 0
 
 ###############################################################################
