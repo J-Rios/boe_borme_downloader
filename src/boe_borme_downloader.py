@@ -60,7 +60,7 @@ BOE_URL = "https://boe.es"
 
 BOE_SUMMARY_URL = f"{BOE_URL}/diario_boe/xml.php?id=BOE-S-"
 BOE_SUMMARY_EMITER = "departamento"
-BOE_DOC_TYPE = "XML"
+BOE_DOC_TYPE = "XML" # Set to "PDF" to get PDF files
 BOE_DATA_DIR = "boe"
 
 BORME_SUMMARY_URL = f"{BOE_URL}/diario_borme/xml.php?id=BORME-S-"
