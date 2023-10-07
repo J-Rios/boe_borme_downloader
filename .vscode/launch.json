@@ -12,7 +12,7 @@
             "console": "integratedTerminal",
             "justMyCode": true,
             "args": [
-                "--outdir", "./data",
+                "--outdir", "./downdocs",
                 "--type", "boe",
                 "--date", "20231004"
             ]
